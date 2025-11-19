@@ -1,0 +1,63 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+# These files are created by PyInstaller
+# and should generally be ignored.
+# You might want to keep the .spec file if you need to rebuild.
+*.spec
+build/
+dist/
+# If you are building for different platforms, you might have other build/dist directories
+# For example, build-win/, dist-win/ etc.
+# Add them here if applicable.
+
+# Virtual environment
+# This is crucial for most Python projects to avoid committing environment files.
+venv/
+.venv/
+env/
+.env/
+myenv/
+
+# Editor files
+# Ignore files created by common editors/IDEs
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store # macOS specific
+
+# Test files
+.pytest_cache/
+htmlcov/
+.coverage
+
+# Miscellaneous
+.mypy_cache/
+.tox/
