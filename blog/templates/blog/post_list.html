@@ -1,25 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bibek blog</title>
-</head>
-<body>
-    <header>
-        <h1>
-            <a href="/">Bibek blog</a>
-        </h1>
-    </header>
-    <article>
-        <time>published: 2025.01.01 14:40:00</time>
-        <h2><a href="">My first post</a></h2>
-        <p>This is my first static post</p>
-    </article>
-       <article>
-        <time>published: 2025.01.02 14:40:00</time>
-        <h2><a href="">My second post</a></h2>
-        <p>This is my second static post</p>
-    </article>
-</body>
-</html>
+    {% extends "blog/base.html" %}
+    {% block content%}
+    
+    {% for post in posts %}
+                <article class="post">
+                    <time class="date">
+                        {{post.published_date}}
+                    </time>
+                    <h2><a href="{% url "post_detail" pk=post.pk %}"> {{ post.title}}</a> </h2>
+                    <p> {{ post.text | linebreaksbr}}</p>
+                </article>
+    {% endfor %}
+    {% endblock %}
