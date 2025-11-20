@@ -11,6 +11,15 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+
+# Optional: if you're using PyMySQL instead of mysqlclient, expose it as MySQLdb
+try:
+    import pymysql
+    pymysql.install_as_MySQLdb()
+except Exception:
+    # If PyMySQL isn't installed that's fine — use mysqlclient or install PyMySQL
+    pass
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -57,7 +66,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR,'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -85,15 +94,29 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE':'django.db.backends.mysql',
-        'NAME':'siteblog',
-        'USER':'root',
-        'PASSWORD':'root',
-        'HOST':'localhost',
-        'PORT':'3306'
-
+        'ENGINE': os.environ.get('DJANGO_DB_ENGINE', 'django.db.backends.mysql'),
+        'NAME': os.environ.get('MYSQL_DATABASE', 'siteblog'),
+        'USER': os.environ.get('MYSQL_USER', 'root'),
+        'PASSWORD': os.environ.get('MYSQL_PASSWORD', 'root'),
+        'HOST': os.environ.get('MYSQL_HOST', 'localhost'),
+        'PORT': os.environ.get('MYSQL_PORT', '3306'),
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            'charset': 'utf8mb4',
+        },
     }
 }
+
+# If you prefer to use SQLite locally, you can set `DJANGO_DB_ENGINE` to
+# `django.db.backends.sqlite3` and Django will use the following file-based DB:
+#
+# if os.environ.get('DJANGO_DB_ENGINE') == 'django.db.backends.sqlite3':
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': BASE_DIR / 'db.sqlite3',
+#         }
+#     }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -136,3 +159,6 @@ STATIC_ROOT = BASE_DIR / 'static'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/'

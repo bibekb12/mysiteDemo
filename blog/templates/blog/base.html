@@ -19,7 +19,16 @@
             <a href={% url "post_new" %} class = "top-menu">
                 {% include './icons/file-earmark-plus.svg' %}
             </a>
+
+            <form method="POST" action="{% url 'logout' %}" style="display:inline" class="m-0">
+                {% csrf_token %}
+            <button type="submit" class="btn btn-sm btn-danger">Logout</button>
+        </form>
+            {% else %}
+            <a href="{% url 'login' %}" class="btn btn-sm btn-success">
+            Login</a>
             {% endif %}
+
             <h1><a href="/">Django Bibek Blog</a></h1>
         </div>
     </header>
