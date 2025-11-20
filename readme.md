@@ -1,4 +1,4 @@
-# djanopro — Simple Django Blog Demo
+# djangoproject — Simple Django Blog Demo
 
 A small Django demo project that implements a blog app with post listing, detail, create/edit, and basic admin integration. This repository is intended as a compact example for learning and local development.
 
