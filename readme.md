@@ -87,9 +87,10 @@ This project can use MySQL as its database. The Django settings have been update
 pip install PyMySQL
 ```
 
-Set environment variables (PowerShell example):
+Set database to this variables :
 
 ```configuration at setting.py Change accourding to your requirement
+
 MYSQL_DATABASE = "siteblog"
 MYSQL_USER = "root"
 MYSQL_PASSWORD = "root"
